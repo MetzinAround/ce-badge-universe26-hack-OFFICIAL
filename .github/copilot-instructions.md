@@ -1,6 +1,15 @@
 # Copilot instructions for GitHub Universe badge development
 
-The repository targets the **GitHub Universe 2026 badge** by default.
+This repository targets the **GitHub Universe 2026 badge** by default and also
+hosts the Campus Experts hackathon workflow layered on top of it. Upstream
+badge runtime, hardware, and legacy 2025 material live in `badge/`, `badge25/`,
+`hardware/`, `eink/`, and `ir-beacon/`. Campus Experts workflow, tooling, and
+team submissions live in `Team1/`-`Team4/`, `docs/`, `simulator/`,
+and `.github/skills/badge-app-builder/`. See
+[`docs/UPSTREAM-SYNC.md`](../docs/UPSTREAM-SYNC.md) for the full ownership
+boundary and sync policy.
+
+## Upstream badge development (`badge/`, `hardware/`, `badge25/`)
 
 - Work in `badge/` for current firmware and applications.
 - Read `badge/AGENTS.md` before changing a 2026 app.
@@ -13,7 +22,7 @@ The repository targets the **GitHub Universe 2026 badge** by default.
 - `badge25/simulator/` and `badge25/badgerware/` document the legacy 2025
   runtime and must not be treated as authoritative for 2026 apps.
 
-## Universe 2026 essentials
+### Universe 2026 essentials
 
 - The RP2350B firmware supplies `badge`, `screen`, `image`, `font`, `color`,
   `shape`, `brush`, `vec2`, `rect`, `mat3`, `run`, button constants, display
@@ -41,4 +50,102 @@ The repository targets the **GitHub Universe 2026 badge** by default.
 
 When porting a 2025 app, preserve behavior and assets but explicitly translate
 the graphics, input, timing, orientation, lifecycle, and state APIs. Use
-`badge/apps/input_test/`, `badge/apps/demos/` and `badge/apps/plucky_cluck/` as primary references.
+`badge/apps/input_test/`, `badge/apps/demos/` and `badge/apps/plucky_cluck/` as
+primary references.
+
+## Campus Experts workflow (`TeamN/`, `docs/`, `simulator/`)
+
+Use the physical badge as the compatibility target. Two simulators are
+available for fast iteration, but neither can prove BLE, GPIO, IR electrical
+behavior, real timing, power use, or exact memory behavior:
+
+- The [Pimoroni Badgeware Web Simulator](https://pimoroni.github.io/badgeware-web-simulator/)
+  runs in a browser with no install. Suggest it first for a quick visual
+  check of an idea, especially when Python/Pygame is not set up locally.
+- The local `simulator/badge_simulator.py` (Pygame) is better for this
+  repository's files, hot reload, screenshots, `--perf` profiling, and
+  repeatable command-line validation before a pull request.
+
+1. Before creating an app, identify the user's assigned `TeamN` folder from
+   their prompt or current app path. Do not place a CE submission in
+   `badge/apps/`.
+2. Use the `badge-app-builder` skill for app creation, debugging, validation,
+   simulator work, and physical badge deployment.
+3. Read the closest example in `badge/apps/` before creating an app.
+4. Read the relevant reference in
+   `.github/skills/badge-app-builder/references/`.
+5. For a Campus Experts submission, create apps under the assigned
+   `TeamN/<lowercase-app-name>/` folder. Treat `badge/apps/` as examples and
+   shared badge code.
+6. Include `__init__.py` and a 24x24 `icon.png`.
+7. Use the 160x120 default logical layout, but use `screen.width` and
+   `screen.height` so apps also work in `HIRES | VSYNC` mode.
+8. Keep `update()` short and non-blocking.
+9. Use the Universe 2026 `badge` API and logical actions such as
+   `badge.pressed(BUTTON_SELECT)` and `badge.held(BUTTON_LEFT)`. Do not use
+   the archived 2025 `io` API in new apps.
+10. Use `State` or a uniquely named root file for saved data.
+11. Never put credentials in an app. Device credentials belong in the root
+    `badge/secrets.py`, which must not be committed or deployed.
+12. Run the validator after each meaningful change. Before a pull request,
+    run `validate_submissions.py TeamN`.
+13. Call `run(update)` at module scope. Do not put it behind an
+    `if __name__ == "__main__"` guard; the physical launcher imports apps.
+14. Before declaring Campus Experts repository work complete, run the exact
+    repository checks listed below. Do not rely only on a simulator launch or
+    unresolved review thread status.
+
+### Campus Experts commands
+
+```bash
+python3 .github/skills/badge-app-builder/scripts/scaffold_app.py my-app \
+  --title "My App" --apps-dir Team1
+python3 .github/skills/badge-app-builder/scripts/validate_app.py Team1/my-app
+python3 simulator/badge_simulator.py Team1/my-app
+```
+
+Replace `Team1` with the team's assigned folder. For a quick browser preview
+instead of (or before) the local simulator, point the user to
+https://pimoroni.github.io/badgeware-web-simulator/.
+
+Use `--target hardware` when checking a hardware-only feature. Use
+`--screenshots`, `--clean`, and `--perf` when those checks matter.
+
+For changes to shared code, examples, validators, or workflows, run:
+
+```bash
+python3 -m unittest discover \
+  -s .github/skills/badge-app-builder/tests -v
+python3 -m compileall -q badge simulator .github/skills/badge-app-builder
+python3 .github/skills/badge-app-builder/scripts/validate_submissions.py badge/apps
+python3 .github/skills/badge-app-builder/scripts/validate_submissions.py
+```
+
+### Hardware and feature rules for Campus Experts apps
+
+- HOME belongs to the launcher. Do not take it over in normal apps.
+- Keep BLE interrupt handlers short. Queue data and process it in `update()`.
+- Bound network responses, queues, histories, and cached data.
+- Use an offline path for Wi-Fi apps where possible.
+- Treat IR, LEDs, battery, GPIO, Qw/ST accessories, and charging as
+  hardware-only behavior until tested on a real badge.
+- Do not claim physical compatibility from an emulator launch alone.
+- Use logical, orientation-aware controls. Do not map behavior to physical A,
+  B, or C positions.
+- Use `badge.ticks_delta` for frame-rate-independent movement and animation.
+- Use `badge.imu()`, `badge.direction()`, `badge.touched()`, and
+  `badge.upside_down()` only when the app needs those 2026 features.
+
+## Repository hygiene
+
+Do not commit `.venv/`, `__pycache__/`, `*.pyc`, `.badge_state/`,
+`badge/secrets.py`, `.DS_Store`, screenshots, or personal credentials.
+
+GitHub Actions must use read-only permissions, full commit SHAs for remote
+actions, `persist-credentials: false` for checkout, and a job timeout. Do not
+use `pull_request_target` or expose secrets to code from pull requests.
+
+This repository is the maintained Campus Experts fork of `badger/home`. The
+old Badgeware runtime is archived in `badge25/`; do not copy its API into new
+apps. See [`docs/UPSTREAM-SYNC.md`](../docs/UPSTREAM-SYNC.md) before changing
+any file that overlaps between the upstream runtime and the Campus layer.
