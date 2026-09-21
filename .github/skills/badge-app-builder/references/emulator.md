@@ -1,8 +1,11 @@
 # Universe 2026 emulator workflow
 
-The local simulator models the 2026 runtime for fast UI and state iteration.
-It does not prove physical touch, IMU, wireless, GPIO, IR, power, or exact
-MicroPython memory behavior.
+Two simulators are available. For a quick visual check with no install,
+prefer the [Pimoroni Badgeware Web Simulator](https://pimoroni.github.io/badgeware-web-simulator/)
+first. The local simulator below models the 2026 runtime for fast UI and
+state iteration against this repository's files, hot reload, screenshots,
+and `--perf` profiling. Neither simulator proves physical touch, IMU,
+wireless, GPIO, IR, power, or exact MicroPython memory behavior.
 
 ## Setup
 

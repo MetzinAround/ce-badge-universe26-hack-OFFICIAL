@@ -10,7 +10,9 @@ available while adding a simple team workflow for Campus Experts.
 This repository includes:
 
 - The `badge-app-builder` Copilot skill.
-- A local Pygame simulator.
+- The [Pimoroni Badgeware Web Simulator](https://pimoroni.github.io/badgeware-web-simulator/)
+  as the preferred quick browser preview, plus a local Pygame simulator for
+  repository-local, command-line testing.
 - App validation and physical-badge deployment scripts.
 - Working Universe 2026 examples for screens, games, saved state, images,
   Wi-Fi, IR, BLE,

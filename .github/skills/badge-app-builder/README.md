@@ -11,7 +11,9 @@ Hackable Conference Badge.
   battery patterns from the
   current apps.
 - Scaffolding and validating an app.
-- Iterating with the Pygame simulator.
+- Iterating with the [Pimoroni Badgeware Web Simulator](https://pimoroni.github.io/badgeware-web-simulator/)
+  for a quick browser check, or the local Pygame simulator for
+  repository-local, command-line iteration.
 - Safely copying one app to a physical badge in USB Disk Mode.
 
 The skill treats the physical RP2350B badge as the compatibility target. It
