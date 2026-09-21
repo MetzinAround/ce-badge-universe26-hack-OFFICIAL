@@ -62,7 +62,7 @@ Your team will be assigned one folder:
 - `Team2/`
 - `Team3/`
 - `Team4/`
-Feel free to pick a team name and ask me to change the folder name! :D
+Use the assigned `TeamN/` folder name as-is (the validation tools look for `Team1`–`Team4`). You can still choose any app names inside it.
 
 
 Put all team code, images, notes, and other project files inside that folder.

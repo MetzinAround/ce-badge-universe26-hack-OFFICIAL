@@ -319,7 +319,7 @@ class AppVisitor(ast.NodeVisitor):
                 self.asset_paths.append((argument.value, node.lineno))
 
         if (
-            owner == "shapes"
+            owner in {"shape", "shapes"}
             and method == "rectangle"
             and len(node.args) >= 4
             and all(
