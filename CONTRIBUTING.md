@@ -22,14 +22,14 @@ Choose one teammate to be the fork owner.
 4. Each teammate clones the same shared fork:
 
    ```bash
-   git clone https://github.com/TEAM-OWNER/ce-badge-hack-universe26.git
-   cd ce-badge-hack-universe26
+   git clone https://github.com/TEAM-OWNER/ce-badge-universe26-hack-OFFICIAL.git
+   cd ce-badge-universe26-hack-OFFICIAL
    ```
 
 5. Each teammate adds this repository as the `upstream` remote:
 
    ```bash
-   git remote add upstream https://github.com/campus-experts/ce-badge-hack-universe26.git
+   git remote add upstream https://github.com/campus-experts/ce-badge-universe26-hack-OFFICIAL.git
    git remote -v
    ```
 
@@ -182,7 +182,7 @@ When all team pull requests are merged into the shared fork:
 3. Run the validator and simulator again for every team app.
    Run `validate_submissions.py TeamN` once as the final team-wide check.
 4. Open one pull request with:
-   - **Base repository:** `campus-experts/ce-badge-hack-universe26`
+   - **Base repository:** `campus-experts/ce-badge-universe26-hack-OFFICIAL`
    - **Base branch:** `main`
    - **Head repository:** the shared team fork
    - **Compare branch:** `main`

@@ -51,7 +51,7 @@ git remote -v
 For a Campus Expert team fork:
 
 ```bash
-git remote add upstream https://github.com/campus-experts/ce-badge-hack-universe26.git
+git remote add upstream https://github.com/campus-experts/ce-badge-universe26-hack-OFFICIAL.git
 git remote add badger-home https://github.com/badger/home.git
 git remote -v
 ```
