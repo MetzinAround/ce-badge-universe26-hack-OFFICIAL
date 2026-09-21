@@ -20,13 +20,17 @@ The launcher supplies common globals such as `badge`, `screen`, `image`,
 `font`, `color`, `shape`, `brush`, `vec2`, `rect`, `mat3`, `run`, button
 constants, display-mode constants, and filesystem helpers.
 
-Use an explicit app directory when an app has local modules or relative assets:
+Use an explicit app directory when an app has local modules or relative
+assets. Prefer resolving it from `__file__` rather than hard-coding
+`/system/apps/<name>`: a hard-coded path only matches the deployed hardware
+location and breaks when the same app is loaded from a Campus Experts
+`TeamN/<name>` folder (for example, in the simulator).
 
 ```python
 import os
 import sys
 
-APP_DIR = "/system/apps/my_app"
+APP_DIR = os.path.dirname(__file__) or "/system/apps/my_app"
 os.chdir(APP_DIR)
 sys.path.insert(0, APP_DIR)
 ```

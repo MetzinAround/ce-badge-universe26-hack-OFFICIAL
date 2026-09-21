@@ -71,7 +71,7 @@ def app_source(app_name: str, title: str) -> str:
 import os
 import sys
 
-APP_DIR = "/system/apps/{app_name}"
+APP_DIR = os.path.dirname(__file__) or "/system/apps/{app_name}"
 os.chdir(APP_DIR)
 sys.path.insert(0, APP_DIR)
 
