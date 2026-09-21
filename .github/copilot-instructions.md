@@ -5,7 +5,7 @@ hosts the Campus Experts hackathon workflow layered on top of it. Upstream
 badge runtime, hardware, and legacy 2025 material live in `badge/`, `badge25/`,
 `hardware/`, `eink/`, and `ir-beacon/`. Campus Experts workflow, tooling, and
 team submissions live in `Team1/`-`Team4/`, `docs/`, `simulator/`,
-`contacts-editor/`, and `.github/skills/badge-app-builder/`. See
+and `.github/skills/badge-app-builder/`. See
 [`docs/UPSTREAM-SYNC.md`](../docs/UPSTREAM-SYNC.md) for the full ownership
 boundary and sync policy.
 

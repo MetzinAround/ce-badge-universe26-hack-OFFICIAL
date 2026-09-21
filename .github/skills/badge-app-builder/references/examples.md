@@ -17,8 +17,6 @@ Use the smallest relevant examples first, then combine patterns.
 | Robust network UI | `badge/apps/contributions` | Cached content, background refresh, multiple views |
 | Long-running network display | `badge/apps/marquee` | Incremental backend, NTP/timezone, settings, LEDs, charging |
 | IR receive | `badge/apps/quest` | NEC receiver, descriptor, persistent completion |
-| BLE peripheral/browser | `badge/apps/contacts` and `contacts-editor` | GATT service, Web Bluetooth, chunked JSON, persistent data |
-| BLE peer game | `badge/apps/pong` | Advertising, scanning, connection, notifications, cleanup |
 | Startup/frame animation | `badge/apps/startup` | `screen.load_into`, frame sequence, explicit display update |
 
 ## Pattern selection
