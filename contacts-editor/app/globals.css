@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Mona Sans";
+  src: url("/fonts/Mona-Sans.woff2") format("woff2 supports variations"), url("/fonts/Mona-Sans.woff2") format("woff2-variations");
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
+
+body {
+  @apply bg-ink text-mist antialiased;
+}
+
+::selection {
+  background: rgba(211, 250, 55, 0.25);
+}
+
+:focus-visible {
+  outline: 2px solid #d3fa37;
+  outline-offset: 2px;
+}
