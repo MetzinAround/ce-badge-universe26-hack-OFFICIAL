@@ -19,6 +19,41 @@ This repository includes:
   and launcher integration.
 - Hardware, Badgeware API, emulator, and deployment references.
 
+## Repository layout
+
+| Path | Purpose |
+| --- | --- |
+| [`badge/`](./badge/) | Upstream Universe 2026 `/system` files and apps |
+| [`badge25/`](./badge25/) | Archived Universe 2025 files, docs, simulator, and apps |
+| [`hardware/`](./hardware/) | Universe 2026 schematic and hardware/GPIO reference |
+| [`eink/`](./eink/) | Earlier e-ink badge resources |
+| [`ir-beacon/`](./ir-beacon/) | IR beacon utilities and protocol experiments |
+| `Team1/`-`Team4/` | Campus Experts team app submissions |
+| [`docs/`](./docs/) | Campus Experts and fork/sync documentation |
+| [`simulator/`](./simulator/) | Local Pygame simulator |
+| [`.github/skills/badge-app-builder/`](./.github/skills/badge-app-builder/) | Copilot skill for building badge apps |
+
+See the [Universe 2026 hardware reference](./hardware/README.md) for the
+RP2350 GPIO map and onboard peripherals, and the
+[USB serial and MicroPython REPL guide](./hardware/USB_SERIAL.md) to inspect
+a connected badge and copy files or apps.
+
+## Pimoroni and Badgeware resources
+
+The Universe 2026 badge is a custom derivative of Pimoroni's
+[Tufty 2350](https://shop.pimoroni.com/products/tufty-2350). These upstream
+resources are useful references but do not model GitHub's custom
+accelerometer, IR, capacitive-control, or firmware APIs exactly:
+
+- [`pimoroni/tufty2350`](https://github.com/pimoroni/tufty2350) firmware,
+  board definitions, modules, and examples
+- [`pimoroni/badgeware-docs`](https://github.com/pimoroni/badgeware-docs)
+  Badgeware documentation and examples
+- [`pimoroni/badgeware-simulator`](https://github.com/pimoroni/badgeware-simulator)
+  desktop Badgeware Simulator (an alternative to this repo's local simulator)
+- [`pimoroni/badgeware-web-simulator`](https://github.com/pimoroni/badgeware-web-simulator)
+  source for the browser-based simulator linked above
+
 ## Campus Experts team workflow
 
 Campus Experts work in teams of four. Each team uses one shared fork, works
