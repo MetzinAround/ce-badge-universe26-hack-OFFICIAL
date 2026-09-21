@@ -55,9 +55,16 @@ primary references.
 
 ## Campus Experts workflow (`TeamN/`, `docs/`, `simulator/`)
 
-Use the physical badge as the compatibility target. The simulator is useful
-for fast iteration, but it cannot prove BLE, GPIO, IR electrical behavior,
-real timing, power use, or exact memory behavior.
+Use the physical badge as the compatibility target. Two simulators are
+available for fast iteration, but neither can prove BLE, GPIO, IR electrical
+behavior, real timing, power use, or exact memory behavior:
+
+- The [Pimoroni Badgeware Web Simulator](https://pimoroni.github.io/badgeware-web-simulator/)
+  runs in a browser with no install. Suggest it first for a quick visual
+  check of an idea, especially when Python/Pygame is not set up locally.
+- The local `simulator/badge_simulator.py` (Pygame) is better for this
+  repository's files, hot reload, screenshots, `--perf` profiling, and
+  repeatable command-line validation before a pull request.
 
 1. Before creating an app, identify the user's assigned `TeamN` folder from
    their prompt or current app path. Do not place a CE submission in
@@ -97,7 +104,9 @@ python3 .github/skills/badge-app-builder/scripts/validate_app.py Team1/my-app
 python3 simulator/badge_simulator.py Team1/my-app
 ```
 
-Replace `Team1` with the team's assigned folder.
+Replace `Team1` with the team's assigned folder. For a quick browser preview
+instead of (or before) the local simulator, point the user to
+https://pimoroni.github.io/badgeware-web-simulator/.
 
 Use `--target hardware` when checking a hardware-only feature. Use
 `--screenshots`, `--clean`, and `--perf` when those checks matter.
